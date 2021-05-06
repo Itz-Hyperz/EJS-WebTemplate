@@ -1,0 +1,11 @@
+{
+    "main": {
+        "port": "3000",
+        "domain": "http://localhost:3000",
+        "logourl": "https://hyperz.dev/images/logo.png"
+    },
+
+    "other": {
+        "author": "Hyperz#0001"
+    }
+}
