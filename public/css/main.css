@@ -1,0 +1,12 @@
+body {
+    width: 100%;
+    height: 100%;
+    background-color: blue;
+    overflow: hidden;
+}
+
+p {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 26px;
+    color: white;
+}
