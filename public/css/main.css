@@ -1,12 +1,16 @@
 body {
-    width: 100%;
+    background-color: #1c1c1c;
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
     height: 100%;
-    background-color: blue;
-    overflow: hidden;
+    font-family: Montserrat, sans-serif;
+    position: relative;
+    overflow-x: hidden;
 }
 
 p {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 26px;
     color: white;
 }
