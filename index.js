@@ -2,18 +2,20 @@
 const express = require('express')
 const app = express()
 const chalk = require('chalk')
+const ms = require('ms')
 const nodelogger = require('hyperz-nodelogger')
 const logger = new nodelogger()
+
 const config = require('./config.js');
 const backend = require('./backend.js');
-const ms = require('ms')
+let con;
 
 /* --------------------------------------------------------------------------------------------------------------
 
 If using MySQL you may un-comment this
 
 const { createConnection } = require('mysql') // Imports SQL Module
-const con = createConnection(config.mysql) // Defines Con Var
+con = createConnection(config.mysql) // Defines Con Var
 
 try {
     con.connect() // Trys to connect to MySQL Server
@@ -38,7 +40,7 @@ app.set('view engine', 'ejs');
 
 // Navigation (add pages here)
 app.get('', (req, res) => {
-    res.render('index.ejs', { backend: backend, config: config })
+    res.render('index.ejs', { backend: backend, config: config, con: con })
 })
 
 // Searched the redirects for the page (must be 1 before 404 page)
@@ -50,7 +52,7 @@ config.redirects.forEach(element => {
 
 // MAKE SURE THIS IS LAST FOR 404 PAGE REDIRECT
 app.get('*', function(req, res){
-    res.render('404.ejs', { config: config, backend: backend });
+    res.render('404.ejs', { backend: backend, config: config, con: con });
 });
 
 // Main Logger Event
