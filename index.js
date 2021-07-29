@@ -6,6 +6,26 @@ const nodelogger = require('hyperz-nodelogger')
 const logger = new nodelogger()
 const config = require('./config.js');
 const backend = require('./backend.js');
+const ms = require('ms')
+
+/* --------------------------------------------------------------------------------------------------------------
+
+If using MySQL you may un-comment this
+
+const { createConnection } = require('mysql') // Imports SQL Module
+const con = createConnection(config.mysql) // Defines Con Var
+
+try {
+    con.connect() // Trys to connect to MySQL Server
+} catch(e) {
+    console.log(chalk.red(`Something went wrong when trying to connect to MySQL:`, e.stack)) // Logs any error
+}
+
+setInterval(() => {
+    con.ping() // Pings the SQL Server to avoid timeout
+}, ms('25m')) // Pings server every 25 minutes
+
+-------------------------------------------------------------------------------------------------------------- */ 
 
 // Static Files
 app.use(express.static('public'));

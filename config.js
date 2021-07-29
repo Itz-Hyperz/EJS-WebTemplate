@@ -4,6 +4,19 @@ const config = {
     port: "3000",
     domain: "http://localhost:3000",
 
+    /*
+
+    If using MySQL you may un-comment this
+
+    mysql: {
+        host: "localhost",
+        user: "root",
+        password: "",
+        database: "dbname"
+    },
+
+    */
+
     // Cool Customisable Stuffs
     logourl: "https://hyperz.dev/images/logo.png",
     redirects: [
