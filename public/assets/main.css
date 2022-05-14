@@ -1,0 +1,27 @@
+html {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    font-size: 2rem;
+    text-align: center
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    transition: color 1s
+}
+
+a:hover {
+    color: rgb(0, 162, 255);
+}
+
+h1, h3 {
+    color: white;
+    text-align: center;
+    transition: color 1s
+}
+
+h1:hover, h3:hover {
+    color: rgb(0, 162, 255);
+}
