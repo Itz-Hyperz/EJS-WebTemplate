@@ -39,6 +39,10 @@ app.get('/account', backend.checkAuth, async function(req, res) {
     res.render('account.ejs', { user: req.session.passport.user });
 });
 
+app.get('/discorduserdata', backend.checkAuth, async function(req, res) {
+    res.type('json').send(JSON.stringify(req.session.passport.user, null, 4) + '\n');
+});
+
 app.get('/auth/discord', passport.authenticate('discord'));
 app.get('/auth/discord/callback', passport.authenticate('discord', {failureRedirect: '/'}), async function(req, res) {
     req.session?.loginRef ? res.redirect(req.session.loginRef) : res.redirect('/');
