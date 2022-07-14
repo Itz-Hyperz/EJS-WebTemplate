@@ -1,13 +1,24 @@
-<html>
+<html lang="en">
     <head>
-        <link rel="stylesheet" href="assets/main.css">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Document - Home</title>
+        <meta property="og:title" content="Document - Home" />
+        <link rel="icon" href="/assets/logo.png">
+        <meta property="og:image" content="/assets/logo.png">
+        <meta name="theme-color" content="#5865F2">
+        <meta name="description" content="Some page description..." />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="Some page description..." />
     </head>
     <body>
+        <%- include('_header') %>
         <% if(loggedIn) { %>
             <a href="/account">Account</a>
         <% } else { %>
             <a href="/auth/discord">Login</a>
         <% } %>
+        <%- include('_footer') %>
         <script>
             console.log('Created by Hyperz#0001');
         </script>
