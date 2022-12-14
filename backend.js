@@ -7,9 +7,10 @@ const express = require("express");
 
 async function init(app, con) {
     if (Number(process.version.slice(1).split(".")[0] < 16)) throw new Error(`Node.js v16 or higher is required, Discord.JS relies on this version, please update @ https://nodejs.org`);
-    var multerStorage = multer.memoryStorage()
+    var multerStorage = multer.memoryStorage();
     app.use(multer({ storage: multerStorage }).any());
-    app.use(bodyParser.urlencoded({ extended: false }))
+    app.use(bodyParser.urlencoded({ extended: false }));
+    app.use(express.json());
     app.use(session({
         secret: 'keyboard cat',
         resave: false,
@@ -19,7 +20,7 @@ async function init(app, con) {
     app.use(passport.initialize());
     app.use(passport.session());
     app.use(express.static('public'));
-    app.use('/assets', express.static(__dirname + 'public/assets'))
+    app.use('/assets', express.static(__dirname + 'public/assets'));
     app.set('views', './views');
     app.set('view engine', 'ejs');
     sqlLoop(con);
