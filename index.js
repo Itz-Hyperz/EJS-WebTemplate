@@ -15,7 +15,7 @@ backend.init(app, con);
 
 // Discord Login Passport
 const passport = require('passport');
-const DiscordStrategy = require('passport-discord-faxes').Strategy;
+const DiscordStrategy = require('passport-discord-hyperz').Strategy;
 passport.serializeUser(function(user, done) { done(null, user) });
 passport.deserializeUser(function(obj, done) { done(null, obj) });
 passport.use(new DiscordStrategy({
