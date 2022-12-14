@@ -1,0 +1,82 @@
+html, body {
+    overflow-x: hidden !important;
+}
+
+body {
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-color: #1a1a1a;
+    width: 100%;
+    height:100%;
+    margin: auto;
+    padding: 0;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    text-align: center;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 1em;
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    transition: color 1s
+}
+
+a:hover {
+    color: rgb(0, 162, 255);
+}
+
+.exo {
+    font-family: 'Exo', sans-serif !important;
+}
+
+.montserrat {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.sourcecodepro {
+    font-family: 'Source Code Pro', monospace !important;
+}
+
+.worksans {
+    font-family: 'Work Sans', sans-serif !important;
+}
+
+/* Scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    /* background: #f1f1f1; */
+    background: rgba(255, 0, 0, 0);
+    /* background-color: transparent; */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.075);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(136, 136, 136, 0.445);
+}
+
+::-webkit-scrollbar-corner {
+    background: rgba(136, 136, 136, 0.445);
+}
+
+@media only screen and (max-width: 540px) {
+    /* For mobile view */
+}
