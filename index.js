@@ -1,5 +1,5 @@
 // Basic Imports
-const config = require("./config.js");
+const config = require("./config.json");
 const express = require("express");
 const app = express();
 const chalk = require('chalk');
