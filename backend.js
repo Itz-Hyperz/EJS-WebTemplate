@@ -19,10 +19,12 @@ async function init(app, con) {
     }));
     app.use(passport.initialize());
     app.use(passport.session());
-    app.use(express.static('public'));
-    app.use('/assets', express.static(__dirname + 'public/assets'));
-    app.set('views', './views');
+    app.set('views', './src/views');
     app.set('view engine', 'ejs');
+    app.use(express.static('public'));
+    app.use(express.static('src/static'));
+    app.use('/assets', express.static(__dirname + 'public/assets'));
+    app.use('/static', express.static(__dirname + 'src/static/assets'));
     sqlLoop(con);
 };
 
