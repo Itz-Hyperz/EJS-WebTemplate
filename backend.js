@@ -1,4 +1,4 @@
-const config = require("./config.js");
+const config = require("./config.json");
 const passport = require('passport');
 const multer = require('multer');
 const bodyParser = require('body-parser');
