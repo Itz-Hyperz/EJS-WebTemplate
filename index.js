@@ -32,14 +32,17 @@ passport.use(new DiscordStrategy({
 
 // Routing
 app.get('', async function(req, res) {
+    backend.resetAppLocals(app);
     res.render('index.ejs', { loggedIn: req.isAuthenticated() });
 });
 
 app.get('/account', backend.checkAuth, async function(req, res) {
+    backend.resetAppLocals(app);
     res.render('account.ejs', { user: req.session.passport.user });
 });
 
 app.get('/discorduserdata', backend.checkAuth, async function(req, res) {
+    backend.resetAppLocals(app);
     res.type('json').send(JSON.stringify(req.session.passport.user, null, 4) + '\n');
 });
 
