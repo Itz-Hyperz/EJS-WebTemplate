@@ -36,7 +36,7 @@ async function init(app, con) {
 async function resetAppLocals(app) {
     app.locals = {
         config: config,
-        packagejson = require('./package.json')
+        packagejson: require('./package.json')
     };
     storedAppVariable = app;
 };
