@@ -1,3 +1,6 @@
+# PLEASE ⭐ THIS REPOSITORY
+If you love my work and want to support it, simply star the repository, it's free!!!
+
 # EJS-WebTemplate
 A simple ExpressJS Web Template designed to be used for practically any project.
 
