@@ -9,15 +9,20 @@
   "author": "Hyperz#0001",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.4.0",
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.0",
     "chalk": "^4.1.1",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
+    "express-flash": "^0.0.2",
     "express-session": "^1.17.3",
     "figlet": "^1.5.2",
+    "hyperz-utils": "^1.0.7",
     "multer": "^1.4.4",
     "mysql": "^2.18.1",
     "passport": "^0.5.2",
-    "passport-discord-hyperz": "^0.1.4"
+    "passport-discord-hyperz": "^0.1.4",
+    "passport-local": "^1.0.0"
   }
 }

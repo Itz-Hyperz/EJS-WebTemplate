@@ -1,0 +1,90 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Login - <%= sitesettings.sitename %></title>
+        <meta property="og:title" content="Login - <%= sitesettings.sitename %>" />
+        <link rel="icon" href="/assets/logo.png">
+        <meta property="og:image" content="/assets/logo.png">
+        <meta name="theme-color" content="<%= sitesettings.sitecolor %>">
+        <meta name="description" content="<%= sitesettings.sitedesc %>" />
+        <meta property="og:type" content="website" />
+        <meta property="og:description" content="<%= sitesettings.sitedesc %>" />
+    </head>
+    <body>
+        <%- include('_header') %>
+        <div id="login" class="container bg-thatdark mt-5 mb-4 p-4 mx-auto login-auth-main">
+            <h1 class="bigfont mb-3">Login</h1>
+            <div class="login-auth-inner mx-auto">
+                <form action="/auth/local" method="post">
+                    <input type="email" name="email" class="form-control bg-input-dark mb-2" placeholder="Email..." required>
+                    <input type="password" name="password" class="form-control bg-input-dark mb-3" placeholder="Password..." required>
+                    <button type="submit" class="btn btn-theme w-100"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+                    <% if(messages.error) { %>
+                        <p class="text-danger"><%= messages.error %></p>
+                    <% }; %>
+                    <hr>
+                    <button class="btn btn-theme w-100 mb-2" onclick="switcheroo('register')"><i class="fa-solid fa-user-plus"></i> Register</button>
+                    <% if(config.discord.enabled) { %>
+                        <a href="/auth/discord" class="btn bg-discord bd-discord text-white w-100 mb-3"><i class="fa-brands fa-discord"></i> Login W/Discord</a>
+                    <% }; %>
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-lg-6 mb-2">
+                            <a style="color: lightgrey;" href="/privacy">Privacy Policy</a>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                            <a style="color: lightgrey;" href="/cookies">Cookie Policy</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="register" style="display: none;" class="container bg-thatdark mt-5 mb-4 p-4 mx-auto login-auth-main">
+            <h1 class="bigfont mb-3">Register</h1>
+            <div class="login-auth-inner mx-auto">
+                <form action="/register" method="post">
+                    <input type="email" name="email" class="form-control bg-input-dark mb-2" placeholder="Email..." required>
+                    <input type="password" id="p1" name="password" class="form-control bg-input-dark mb-2" placeholder="Password..." required>
+                    <input type="password" id="p2" onkeyup="compare('p1', 'p2')" name="confpassword" class="form-control bg-input-dark mb-2" placeholder="Confirm Password..." required>
+                    <button id="registerButton" disabled="true" type="submit" class="btn btn-theme w-100"><i class="fa-solid fa-user-plus"></i> Register</button>
+                    <p style="display: none;" id="nomatchpass" class="text-danger mt-3 bigfont">Passwords do not match...</p>
+                    <% if(messages.error) { %>
+                        <p class="text-danger p-2 bigfont"><%= messages.error %></p>
+                    <% }; %>
+                    <hr>
+                    <button class="btn btn-theme w-100" onclick="switcheroo('login')"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+                    <div class="row justify-content-center mt-3">
+                        <div class="col-lg-6 mb-2">
+                            <a style="color: lightgrey;" href="/privacy">Privacy Policy</a>
+                        </div>
+                        <div class="col-lg-6 mb-2">
+                            <a style="color: lightgrey;" href="/cookies">Cookie Policy</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <%- include('_footer') %>
+        <script>
+            var login = document.getElementById('login');
+            var register = document.getElementById('register');
+            function switcheroo(value) {
+                login.style.display = 'none';
+                register.style.display = 'none';
+                document.getElementById(value).style.display = 'block';
+            };
+
+            function compare(a, b) {
+                a = document.getElementById(a).value;
+                b = document.getElementById(b).value;
+                if(a !== b) {
+                    document.getElementById('nomatchpass').style.display = "block";
+                    document.getElementById('registerButton').disabled = true;
+                } else {
+                    document.getElementById('nomatchpass').style.display = "none";
+                    document.getElementById('registerButton').disabled = false;
+                };
+            };
+        </script>
+    </body>
+</html>

@@ -2,23 +2,23 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Document - Home</title>
-        <meta property="og:title" content="Document - Home" />
+        <title>Home - <%= sitesettings.sitename %></title>
+        <meta property="og:title" content="Home - <%= sitesettings.sitename %>" />
         <link rel="icon" href="/assets/logo.png">
         <meta property="og:image" content="/assets/logo.png">
-        <meta name="theme-color" content="#5865F2">
-        <meta name="description" content="Some page description..." />
+        <meta name="theme-color" content="<%= sitesettings.sitecolor %>">
+        <meta name="description" content="<%= sitesettings.sitedesc %>" />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="Some page description..." />
+        <meta property="og:description" content="<%= sitesettings.sitedesc %>" />
         <meta name="keywords" content="<%= config.seoKeywords %>" />
     </head>
     <body>
         <%- include('_header') %>
-        <% if(loggedIn) { %>
-            <a href="/account">Account</a>
-        <% } else { %>
-            <a href="/auth/discord">Login</a>
-        <% } %>
+        <div class="container p-5">
+            <h1 class="mb-3">Landing Page</h1>
+            <p class="mb-3">This is simply the landing page for the EJS Website Template!</p>
+            <a href="/login" class="btn btn-primary">Authenticate</a>
+        </div>
         <%- include('_footer') %>
     </body>
 </html>

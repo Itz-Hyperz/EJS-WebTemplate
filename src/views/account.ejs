@@ -2,21 +2,37 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Document - Account</title>
-        <meta property="og:title" content="Document - Account" />
+        <title>Account - <%= sitesettings.sitename %></title>
+        <meta property="og:title" content="Account - <%= sitesettings.sitename %>" />
         <link rel="icon" href="/assets/logo.png">
         <meta property="og:image" content="/assets/logo.png">
-        <meta name="theme-color" content="#5865F2">
-        <meta name="description" content="Some page description..." />
+        <meta name="theme-color" content="<%= sitesettings.sitecolor %>">
+        <meta name="description" content="<%= sitesettings.sitedesc %>" />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="Some page description..." />
+        <meta property="og:description" content="<%= sitesettings.sitedesc %>" />
         <meta name="keywords" content="<%= config.seoKeywords %>" />
     </head>
     <body>
         <%- include('_header') %>
-        <h1><%= user.username + '#' + user.discriminator %></h1>
-        <h3><%= user.email %></h3>
-        <h3><%= user.id %></h3>
+        <div class="container bg-dark p-3 mt-5 mb-4 text-start" style="border-radius: 0.4em;">
+            <h3 class="mb-3"><i class="fa-solid fa-id-card"></i> Account ID</h3>
+            <h5 class="mb-4"><code><%= user.id %></code></h5>
+            <hr>
+            <form action="/backend/update/password" method="post">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 mb-2 mt-2">
+                        <input type="password" name="password" placeholder="New password..." required class="form-control inputstylelol bg-input-dark w-100">
+                    </div>
+                    <div class="col-lg-4 mb-2 mt-2">
+                        <input type="password" name="confpassword" placeholder="Confirm password..." required class="form-control inputstylelol bg-input-dark w-100">
+                    </div>
+                    <div class="col-lg-4 mb-2 mt-2">
+                        <button type="submit" class="btn btn-theme w-100"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+                    </div>
+                </div>
+            </form>
+            <small>Your Account ID does not ever change. It is unique to your account and cannot be replicated.</small>
+        </div>
         <%- include('_footer') %>
     </body>
 </html>

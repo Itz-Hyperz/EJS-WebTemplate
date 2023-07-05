@@ -9,10 +9,11 @@
         "host": "localhost",
         "user": "root",
         "password": "",
-        "database": "database"
+        "database": "changeme"
     },
 
     "discord": {
+        "enabled": false,
         "oauthId": "YOUR_OAUTH_CLIENT_ID",
         "oauthToken": "YOUR_OAUTH_CLIENT_SECRET"
     }
