@@ -1,3 +1,4 @@
+// Imports
 const config = require("./config.json");
 const passport = require('passport');
 const multer = require('multer');
@@ -12,38 +13,42 @@ const pjson = require('./package.json');
 const axios = require('axios');
 const bcrypt = require('bcrypt');
 
+// Basic Variable Setup
 let projectName = 'CHANGE ME'
 let pubApiURL = `https://raw.githubusercontent.com/Itz-Hyperz/version-pub-api/main/versions.json`;
 let storedAppVariable;
 let dbcon;
 
+// Init Function
 async function init(app, con) {
     if (Number(process.version.slice(1).split(".")[0] < 16)) throw new Error(`Node.js v16 or higher is required, Discord.JS relies on this version, please update @ https://nodejs.org`);
-    var multerStorage = multer.memoryStorage();
-    app.use(multer({ storage: multerStorage }).any());
-    app.use(bodyParser.urlencoded({ extended: false }));
-    app.use(express.json());
-    app.use(flash());
-    app.use(session({
+    var multerStorage = multer.memoryStorage(); // req.body setup
+    app.use(multer({ storage: multerStorage }).any()); // req.body setup
+    app.use(bodyParser.urlencoded({ extended: false })); // req.body setup
+    app.use(express.json()); // req.body setup
+    app.use(flash()); // passport flash system for live messages
+    app.use(session({ // passport session setup
         secret: 'keyboard cat',
         resave: false,
         saveUninitialized: false,
         cookie: {maxAge: 31556952000},
     }));
-    app.use(passport.initialize());
-    app.use(passport.session());
-    app.set('views', './src/views');
-    app.set('view engine', 'ejs');
-    app.use(express.static('public'));
-    app.use(express.static('src/static'));
-    app.use('/assets', express.static(__dirname + 'public/assets'));
-    app.use('/static', express.static(__dirname + 'src/static/assets'));
-    dbcon = con;
+    app.use(passport.initialize()); // passport initialization
+    app.use(passport.session()); // passport session initialization
+    app.set('views', './src/views'); // setting views folder
+    app.set('view engine', 'ejs'); // setting views engine
+    app.use(express.static('public')); // making public folder "public"
+    app.use(express.static('src/static')); // making static folder "public"
+    app.use('/assets', express.static(__dirname + 'public/assets')); // creating shortcut
+    app.use('/static', express.static(__dirname + 'src/static/assets')); // creating shortcut
+    dbcon = con; // setting con variable for this file (MySQL Connection)
+    // BEGIN FANCY CONSOLE LOGGING STUFF
     figlet.text(projectName, { font: "Standard", width: 700 }, function(err, data) {
         if(err) throw err;
         let str = `${data}\n-------------------------------------------\n${projectName} is up and running on port ${config.port}!`
         console.log(chalk.bold(chalk.blue(str)));
     });
+    // Version Checking with API link above
     setTimeout(async () => {
         let currver = pjson.version
         let request = await axios({
@@ -58,11 +63,12 @@ async function init(app, con) {
             console.log(`${chalk.green(`[Version Checker]`)} You are on the latest version.`)
         };
     }, 3000);
-    sqlLoop(con);
-    markSqlConnected();
-    await resetAppLocals(app);
+    sqlLoop(con); // Keep SQL connection alive
+    markSqlConnected(); // Mark SQL connected in console
+    await resetAppLocals(app); // Reset app locals to be ready for next render (do this on every page load)
 };
 
+// Keeps settings updated for next render
 async function resetAppLocals(app) {
     dbcon.query(`SELECT * FROM sitesettings`, function(err, settings) {
         if(err) throw err;
@@ -75,12 +81,14 @@ async function resetAppLocals(app) {
     });
 };
 
+// Keeps SQL connection alive
 async function sqlLoop(con) {
     if(con == 0) return;
     await con.ping();
     setTimeout(() => sqlLoop(con), 60000 * 30);
 };
 
+// Logs connection status in console
 async function markSqlConnected() {
     await dbcon.query(`SELECT * FROM sitesettings`, async function(err, row) {
         if(err) {
@@ -91,6 +99,7 @@ async function markSqlConnected() {
     });
 };
 
+// Make sure a user is logged in to view the rendered page
 async function checkAuth(req, res, next) {
     if(req.isAuthenticated()){
         dbcon.query(`SELECT * FROM users WHERE id="${req.user.id}"`, function(err, row) {
@@ -109,14 +118,16 @@ async function checkAuth(req, res, next) {
     }
 };
 
+// Make sure the user is NOT logged in to view the rendered page
 async function checkNotAuth(req, res, next) {
     if(req.isAuthenticated()){
         res.redirect("/account");
-    } else{
+    } else {
         next();
     };
 };
 
+// Username/Password authentication
 async function authenticateUserLocal(email, password, done) {
     dbcon.query(`SELECT * FROM users WHERE email="${await utils.sanitize(email)}"`, async function(err, row) {
         if(err) throw err;
@@ -133,6 +144,7 @@ async function authenticateUserLocal(email, password, done) {
     });
 };
 
+// Generates a user Id for non-oauth2 users
 function generateUserId(length) {
     let result           = '';
     let characters       = '0123456789';
@@ -144,6 +156,7 @@ function generateUserId(length) {
     return date + result;
 };
 
+// Module Exports
 module.exports = {
     init: init,
     checkAuth: checkAuth,
