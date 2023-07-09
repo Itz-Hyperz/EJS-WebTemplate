@@ -4,6 +4,7 @@
     "port": 3000,
     "debugMode": false,
     "seoKeywords": "expressjs, website, template",
+    "ownerIds": ["YOUR_USER_ID"],
 
     "sql": {
         "host": "localhost",
