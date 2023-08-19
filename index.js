@@ -124,8 +124,12 @@ app.post('/auth/local', backend.checkNotAuth, passport.authenticate('local', {
 
 config.ownerIds.forEach(function(item) {
     if(item != 'YOUR_USER_ID') {
-        con.query(`INSERT INTO staff (userid) VALUES ("${item}")`, function(err, row) {
+        con.query(`SELECT * FROM staff WHERE userid="${item}"`, function(err, row) {
             if(err) throw err;
+            if(row[0]) return;
+            con.query(`INSERT INTO staff (userid) VALUES ("${item}")`, function(err, row) {
+                if(err) throw err;
+            });
         });
     };
 });
